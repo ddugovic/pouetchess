@@ -2,7 +2,7 @@
 
 import re, os, sys
 import SCons.Util
-from SCons.Options import Options
+from SCons.Variables import Variables
 
 
 def exists(env):
@@ -185,8 +185,14 @@ def processor(gcc_3_4=True):
 
 	f.close()
 	if len(archflags) == 0:
-		print "Couldn't detect your CPU, guessing i686 compatible.."
-		archflags=['-march=i686']
+		import platform
+		bits = platform.architecture()[0]
+		if bits == '32bit':
+			print "Unrecognized or couldn't detect CPU, guessing i686 compatible.."
+			archflags=['-march=i686']
+		else:
+			print "Unrecognized or couldn't detect CPU, guessing generic.."
+			archflags=['-mtune=generic']
 	return archflags
 
 
@@ -228,7 +234,7 @@ def check_sdl(env, conf):
 		sdlver = sdlobj.read()
 		sdlerr = sdlobj.close()
 		print sdlver,
-		if sdlver.split('.') >= ['1','2','8']:
+		if sdlver.split('.') >= [1,2,8]:
 			env.ParseConfig(sdlcfg+" --cflags --libs")
 		else:
 			print "You need LibSDL version 1.2.8 or greater for this program"
@@ -272,11 +278,11 @@ def generate(env):
 	usrcachefile = 'usropts.py'
 	intcachefile = 'intopts.py'
 	
-	usropts = Options(usrcachefile)
-	intopts = Options(intcachefile)
+	usropts = Variables(usrcachefile)
+	intopts = Variables(intcachefile)
 	
 	#user visible options
-	usropts.AddOptions(
+	usropts.AddVariables(
 		('platform',          'Set to linux or freebsd', None),
 		('debug',             'Set to yes to produce a binary with debug information', 0),
 		('optimize',          'Enable processor optimizations during compilation', 1),
@@ -287,7 +293,7 @@ def generate(env):
 		('strip',             'Discard symbols from the executable (only when neither debugging nor profiling)', True))
 		
 	#internal options
-	intopts.AddOptions(
+	intopts.AddVariables(
 		('LINKFLAGS',     'linker flags'),
 		('LIBPATH',       'library path'),
 		('LIBS',          'libraries'),

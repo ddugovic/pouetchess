@@ -52,6 +52,7 @@ distribution.
 #endif
 
 #include <string>
+#include <string.h>
 #define TIXML_STRING	std::string
 #define TIXML_ISTREAM	std::istream
 #define TIXML_OSTREAM	std::ostream
