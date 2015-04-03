@@ -1,0 +1,59 @@
+<Panel name        = "Pawn promotion"
+	   callbackString = "pawn_promotion">
+	
+	<Position     x = "200" y = "340"/>
+	
+	
+	<Panel name           = "promotion"
+		   drawBounds     = "true"
+		   drawBackground = "true"
+		   layout         = "CEN_YAXIS">
+		
+		<BGColor    x =  "50" y =  "50" z = "50" />
+		<BordersColor x = "216" y = "169" z =  "0" />
+		
+		<Label name = "Title">
+			<Text string = "Il y a promotion! Choisissez votre nouvelle pièce :" fontIndex ="1">
+				<Color r = "0" g = "255" b = "255" />
+			</Text>
+		</Label>     
+		<Separator ratio = "1.0"  />
+		
+		<RadioButton callbackString = "queen"
+					 alphaFadeScale = "1.5"
+					 checked        = "true">
+			<Text   string  = "Reine   " />
+		</RadioButton>
+		
+		<RadioButton callbackString = "knight"
+					 alphaFadeScale = "1.5">
+			<Text   string  = "Cavalier" />
+		</RadioButton>
+		
+		<RadioButton callbackString = "rook"
+					 alphaFadeScale = "1.5">
+			<Text   string  = "Tour    " /> 
+		</RadioButton>
+		
+		<RadioButton callbackString = "bishop"
+					 alphaFadeScale = "1.5">
+			<Text   string  = "Fou     " />
+		</RadioButton>
+		
+		
+		<Label name = "Nothing">
+			<Text string = "" ></Text>
+					</Label>
+		
+		<Button callbackString = "okButtonPromotion">
+			<Color    x =  "255" y =  "0" z = "0" />
+			<Text    string  = "OK" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+		
+	
+  	</Panel>
+		
+
+</Panel>
+

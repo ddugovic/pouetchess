@@ -1,0 +1,234 @@
+<Panel name="MainMenuOptionButtons"
+	   callbackString = "main_menu_options">
+	
+	
+	<Panel 	name       = "ButtonOK">
+		<Position     x = "220" y = "540"/>
+		<Button callbackString = "okButton">
+			<Color    x =  "255" y =  "0" z = "0" />
+			<Text    string  = "OK" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+	</Panel>
+	
+	
+	<Panel name="TabbedPanel">
+		<Position     x = "210" y = "360"/>
+		
+		
+		<TabbedPanel callbackString = "tabs">   
+			<TabButtonsBordersColor  x = "90"  g = "90"  b = "90" />
+			<TabButtonsColor         x = "255" g = "180" b = "40" />
+			<BordersColor            x = "216" y = "169" z =  "0" />
+			<BGColor                 x =  "90" y =  "90" z = "90" />
+			
+			
+	
+			<Panel name       = "General"
+				layout         = "YAXIS">
+				
+
+									
+				<CheckBox callbackString = "Display selection arrow"
+						alphaFadeScale = "1.3"
+						checked        = "false">
+					<Text   string  = "Display selection arrow" />
+				</CheckBox>
+				
+				<CheckBox callbackString = "Display move possibilities"
+						alphaFadeScale = "1.3"
+						checked        = "false">
+					<Text   string  = "Display move possibilities" />
+				</CheckBox>
+
+							
+				
+				<Panel name="lineLanguage"
+					layout         = "XAXIS">
+	
+					
+					<Label name = "Language">
+						<Text string = "Language :" fontIndex ="1" >
+							<Color r = "255" g = "255" b = "255" />
+						</Text>
+					</Label>
+					
+					<ComboBox callbackString = "cbLanguages">
+						
+						<ScrollingColor r = "215" y = "170" z =  "0" />
+						<BordersColor   x = "215" y = "169" z =  "0" />
+						<BGColor        x =  "50" y =  "50" z = "50" />
+						
+						<Item string = "english" />
+						<Item string = "french" />
+					</ComboBox>
+					
+				</Panel>
+				
+				<Label name = "Nothing">
+					<Text string = "" fontIndex ="1" ></Text>
+				</Label>
+				
+				<Label name = "Nothing2">
+					<Text string = "" fontIndex ="1" ></Text>
+				</Label>
+				
+			</Panel>
+			
+	
+			
+			
+			
+			
+			
+			<Panel name       = "Graphics"
+				layout         = "CEN_YAXIS">
+				
+				<Label name = "Resolution">
+					<Text string = "Screen Resolution" fontIndex ="1" >
+						<Color r = "0.8" g = "1" b = "0.8" />
+					</Text>
+				</Label>
+	
+								
+				<CheckBox callbackString = "Full screen"
+						alphaFadeScale = "1.3"
+						checked        = "false">
+					<Text   string  = "Full screen" />
+				</CheckBox>
+			
+				
+				
+				<Panel 	name       = "Width_panel"
+						layout     = "XAXIS">
+					
+					<Label name = "Width">
+						<Text string = "Screen width :" fontIndex ="1" >
+							<Color r = "255" g = "255" b = "255" />
+						</Text>
+					</Label>
+				
+					<TextBox callbackString = "scr_width">
+						<Dimensions x = "100" />
+						<Color      x = "0.8" y =  "0.8" z = "0.8" />
+						<Text   string  = "1024" />
+      				</TextBox>
+				
+				</Panel>
+				
+				<Panel 	name       = "Height_panel"
+						layout     = "XAXIS">
+					
+					<Label name = "Width">
+						<Text string = "Screen height :" fontIndex ="1" >
+							<Color r = "255" g = "255" b = "255" />
+						</Text>
+					</Label>
+					
+					<TextBox callbackString = "scr_height">
+						<Dimensions x = "100" />
+						<Color      x = "0.8" y =  "0.8" z = "0.8" />
+						<Text   string  = "768" />
+					</TextBox>
+					
+				</Panel>
+				
+				<Label name = "Info_reboot1">
+					<Text string = "You have to reboot pouetChess in order" fontIndex ="1" >
+						<Color r = "1" g = "0.25" b = "0.25" />
+					</Text>
+				</Label>
+				
+				<Label name = "Info_reboot2">
+					<Text string = "to apply these graphic changements" fontIndex ="1" >
+						<Color r = "1" g = "0.25" b = "0.25" />
+					</Text>
+				</Label>
+				
+			</Panel>
+			
+			
+			
+			
+			
+			<Panel name       = "Artificial Intelligence"
+				layout         = "CEN_YAXIS">
+				
+				<Label name = "Info_AI">
+					<Text string = "Powered by FAILE by Adrien Regimbald" fontIndex ="1" >
+						<Color r = "1" g = "0.25" b = "0.25" />
+					</Text>
+				</Label>
+				
+				<Label name = "Info_AI2">
+					<Text string = "http://faile.sourceforge.net/" fontIndex ="1" >
+						<Color r = "0.25" g = "0.25" b = "1" />
+					</Text>
+				</Label>
+				
+				<Label name = "Nothing2">
+					<Text string = "" fontIndex ="1" ></Text>
+				</Label>
+				
+				<Label callbackString = "Info_time">
+					<Text string = "Time to think (in seconds) : 10" fontIndex ="1" ></Text>
+				</Label>
+					
+				<Panel 	name       = "Descriptions"
+						layout     = "XAXIS">
+				
+					<Label name = "Difficulty">
+						<Text string = "Difficulty :" fontIndex ="1" >
+							<Color r = "255" g = "255" b = "255" />
+						</Text>
+					</Label>
+					
+					<ComboBox callbackString = "ai_level">
+						<ScrollingColor r = "215" y = "170" z =  "0" />
+						<BordersColor   x = "215" y = "169" z =  "0" />
+						<BGColor        x =  "50" y =  "50" z = "50" />
+						<Item string = "Newbie" />
+						<Item string = "Very easy" />
+						<Item string = "Easy" />
+						<Item string = "Normal" />
+						<Item string = "Hard" />
+						<Item string = "Very hard" />
+						<Item string = "Ultra hard" />
+						<Item string = "I'm Kasparov ;)" />
+					</ComboBox>
+					
+				</Panel>
+			
+				
+
+				
+				<Label name = "Nothing3">
+					<Text string = "" fontIndex ="1" ></Text>
+				</Label>
+				
+				<Label name = "Nothing4">
+					<Text string = "" fontIndex ="1" ></Text>
+				</Label>
+				
+			
+			</Panel>
+	
+			
+		</TabbedPanel>
+	</Panel>
+	
+	
+
+		
+
+	
+</Panel>	
+	
+	
+	
+	
+	
+	
+
+
+

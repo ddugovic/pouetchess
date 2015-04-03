@@ -1,0 +1,249 @@
+<Panel name="Buttons"
+	   callbackString = "main_menu_buttons"
+	   layout         = "CEN_YAXIS">
+	<Position     x = "280" y = "360"/>
+	
+	<Panel name="Buttons_1_and_2"
+	   layout         = "XAXIS">
+	
+		<Panel name        = "Button1"
+			layout         = "CEN_YAXIS"
+			drawBounds     = "false"
+			drawBackground = "false">
+			
+			<BordersColor x = "216" y = "169" z =  "0" />
+			<BGColor    x =  "50" y =  "50" z = "50" />
+			<Position     x = "0" y = "0"/>
+			
+			
+			<Button callbackString = "onePlayer"
+					drawBounds     = "false"
+					minAlpha       = "0.6">
+				
+				<BordersColor x = "216" y = "169" z =  "0" />
+				<Color        r = "1.0" g = "1.0" b = "1.0" />
+				
+				<TextureRectangle x    = "0.0" y = "1.0" z = "1.0" w = "0.0" />
+				<Texture  type        = "TEXTURE_2D"
+						mipmap      = "true"
+						path        = "1.png">
+					<Wrap   s           = "REPEAT"
+							t           = "REPEAT" />
+					
+					<Filter mag         = "LINEAR" 
+							min         = "LINEAR_MIPMAP_LINEAR" />
+				</Texture>
+				<Dimensions x = "64" y = "64" />
+			</Button>
+			
+			<Label name = "OnePlayer">
+				<Text string = "Un joueur" fontIndex ="1" >
+					<Color r = "255" g = "255" b = "255" />
+				</Text>
+			</Label>
+		</Panel>
+			
+	
+		<!-- The only I have found to insert some spaces between the panels... -->
+		<Panel name           = "pouet1"></Panel>
+		<Panel name           = "pouet2"></Panel>
+		<Panel name           = "pouet3"></Panel>
+		<Panel name           = "pouet4"></Panel>
+		<Panel name           = "pouet5"></Panel>
+		<Panel name           = "pouet6"></Panel>
+		<Panel name           = "pouet7"></Panel>
+		<Panel name           = "pouet8"></Panel>
+		
+		
+			
+		<Panel name           = "Button2"
+			layout         = "CEN_YAXIS"
+			drawBounds     = "false"
+			drawBackground = "false">
+			
+			<BordersColor x = "216" y = "169" z =  "0" />
+			<BGColor    x =  "50" y =  "50" z = "50" />
+			<Position     x = "0" y = "120"/>
+			
+			
+			<Button callbackString = "twoPlayers"
+					drawBounds     = "false"
+					minAlpha       = "0.6">
+				
+				<BordersColor x = "216" y = "169" z =  "0" />
+				<Color        r = "1.0" g = "1.0" b = "1.0" />
+				
+				<TextureRectangle x    = "0.0" y = "1.0" z = "1.0" w = "0.0" />
+				<Texture  type        = "TEXTURE_2D"
+						mipmap      = "true"
+						path        = "2.png">
+					<Wrap   s           = "REPEAT"
+							t           = "REPEAT" />
+					
+					<Filter mag         = "LINEAR" 
+							min         = "LINEAR_MIPMAP_LINEAR" />
+				</Texture>
+				<Dimensions x = "64" y = "64" />
+			</Button>
+			
+			<Label name = "TowPlayers">
+				<Text string = "Deux joueurs" fontIndex ="1" >
+					<Color r = "255" g = "255" b = "255" />
+				</Text>
+			</Label>
+		</Panel>
+	
+	</Panel>
+	
+	<!-- The only I have found to insert some spaces between the panels... -->
+	<Panel name           = "pouet1"></Panel>
+	<Panel name           = "pouet2"></Panel>
+	<Panel name           = "pouet3"></Panel>
+	<Panel name           = "pouet4"></Panel>
+	<Panel name           = "pouet5"></Panel>
+	<Panel name           = "pouet6"></Panel>
+		
+	<Panel name="Buttons_2_and_3_and_4"
+	   layout         = "XAXIS">
+	
+		<Panel name           = "Button3"
+			layout         = "CEN_YAXIS"
+			drawBounds     = "false"
+			drawBackground = "false">
+			
+			<BordersColor x = "216" y = "169" z =  "0" />
+			<BGColor    x =  "50" y =  "50" z = "50" />
+			<Position     x = "0" y = "240"/>
+			
+			
+			<Button callbackString = "options"
+					drawBounds     = "false"
+					minAlpha       = "0.6">
+				
+				<BordersColor x = "216" y = "169" z =  "0" />
+				<Color        r = "1.0" g = "1.0" b = "1.0" />
+				
+				<TextureRectangle x    = "0.0" y = "1.0" z = "1.0" w = "0.0" />
+				<Texture  type        = "TEXTURE_2D"
+						mipmap      = "true"
+						path        = "options.png">
+					<Wrap   s           = "REPEAT"
+							t           = "REPEAT" />
+					
+					<Filter mag         = "LINEAR" 
+							min         = "LINEAR_MIPMAP_LINEAR" />
+				</Texture>
+				<Dimensions x = "64" y = "64" />
+			</Button>
+			
+			<Label name = "Options">
+				<Text string = "Options" fontIndex ="1" >
+					<Color r = "255" g = "255" b = "255" />
+				</Text>
+			</Label>
+		</Panel>	
+		
+		<!-- The only I have found to insert some spaces between the panels... -->
+		<Panel name           = "pouet1"></Panel>
+		<Panel name           = "pouet2"></Panel>
+		<Panel name           = "pouet3"></Panel>
+		<Panel name           = "pouet4"></Panel>
+		<Panel name           = "pouet5"></Panel>
+		<Panel name           = "pouet6"></Panel>
+		<Panel name           = "pouet7"></Panel>
+		<Panel name           = "pouet8"></Panel>
+		
+		
+		
+		<Panel name           = "Button4"
+			layout         = "CEN_YAXIS"
+			drawBounds     = "false"
+			drawBackground = "false">
+			
+			<BordersColor x = "216" y = "169" z =  "0" />
+			<BGColor    x =  "50" y =  "50" z = "50" />
+			<Position     x = "0" y = "360"/>
+			
+			
+			<Button callbackString = "about"
+					drawBounds     = "false"
+					minAlpha       = "0.6">
+				
+				<BordersColor x = "216" y = "169" z =  "0" />
+				<Color        r = "1.0" g = "1.0" b = "1.0" />
+				
+				<TextureRectangle x    = "0.0" y = "1.0" z = "1.0" w = "0.0" />
+				<Texture  type        = "TEXTURE_2D"
+						mipmap      = "true"
+						path        = "about.png">
+					<Wrap   s           = "REPEAT"
+							t           = "REPEAT" />
+					
+					<Filter mag         = "LINEAR" 
+							min         = "LINEAR_MIPMAP_LINEAR" />
+				</Texture>
+				<Dimensions x = "64" y = "64" />
+			</Button>
+			
+			<Label name = "About">
+				<Text string = "Crédits" fontIndex ="1" >
+					<Color r = "255" g = "255" b = "255" />
+				</Text>
+			</Label>
+		</Panel>
+		
+		<!-- The only I have found to insert some spaces between the panels... -->
+		<Panel name           = "pouet09"></Panel>
+		<Panel name           = "pouet10"></Panel>
+		<Panel name           = "pouet11"></Panel>
+		<Panel name           = "pouet12"></Panel>
+		<Panel name           = "pouet13"></Panel>
+		<Panel name           = "pouet14"></Panel>
+		<Panel name           = "pouet15"></Panel>
+		<Panel name           = "pouet16"></Panel>
+		
+		
+	
+		<Panel name           = "Button5"
+			layout         = "CEN_YAXIS"
+			drawBounds     = "false"
+			drawBackground = "false">
+			
+			<BordersColor x = "216" y = "169" z =  "0" />
+			<BGColor    x =  "50" y =  "50" z = "50" />
+			<Position     x = "0" y = "480"/>
+			
+			
+			<Button callbackString = "quit"
+					drawBounds     = "false"
+					minAlpha       = "0.6">
+				
+				<BordersColor x = "216" y = "169" z =  "0" />
+				<Color        r = "1.0" g = "1.0" b = "1.0" />
+				
+				<TextureRectangle x    = "0.0" y = "1.0" z = "1.0" w = "0.0" />
+				<Texture  type        = "TEXTURE_2D"
+						mipmap      = "true"
+						path        = "exit.png">
+					<Wrap   s           = "REPEAT"
+							t           = "REPEAT" />
+					
+					<Filter mag         = "LINEAR" 
+							min         = "LINEAR_MIPMAP_LINEAR" />
+				</Texture>
+				<Dimensions x = "64" y = "64" />
+			</Button>
+			
+			<Label name = "Quit">
+				<Text string = "Quitter" fontIndex ="1" >
+					<Color r = "255" g = "255" b = "255" />
+				</Text>
+			</Label>
+		</Panel>	
+	
+	</Panel>
+	
+	
+</Panel>
+
+

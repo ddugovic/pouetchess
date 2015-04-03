@@ -1,0 +1,35 @@
+<Panel name="main_game"
+	   callbackString = "main_game_buttons">
+	
+	<Panel name="Buttons"
+		   layout     = "XAXIS">
+		
+		<Color    x =  "200" y =  "200" z = "240" />
+		<Position     x = "10" y = "20"/>
+		
+		
+		<Button callbackString = "QuitMainGame">
+			<Text    string  = "Quit" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+		
+		<Button callbackString = "ResetCamera">
+			<Text    string  = "Reset camera" />
+			<Dimensions x = "200" y = "30" />
+		</Button>
+	<!--	
+		<Button callbackString = "GameOptions">
+			<Text    string  = "options" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+		
+		<Button callbackString = "GameHistory">
+			<Text    string  = "history" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+	-->
+		
+	</Panel>
+	
+	
+</Panel>

@@ -1,0 +1,26 @@
+<Panel name        	  = "Results"
+	   drawBounds     = "true"
+	   drawBackground = "true"
+	   layout         = "CEN_YAXIS"
+	   callbackString = "results">
+	
+	<BGColor    x =  "50" y =  "50" z = "50" />
+	<BordersColor x = "216" y = "169" z =  "0" />
+	
+	<Position     x = "350" y = "40"/>
+	
+	<Label name = "Title">
+		<Text string = "Game over" fontIndex ="1">
+			<Color r = "0" g = "255" b = "255" />
+		</Text>
+	</Label>    
+	
+	<Separator ratio = "1.0"  />
+	
+	<Label callbackString = "Result_string">
+		<Text string = "" fontIndex ="1">
+			<Color r = "255" g = "255" b = "0" />
+		</Text>
+	</Label>
+	
+</Panel>

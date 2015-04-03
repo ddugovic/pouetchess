@@ -1,0 +1,46 @@
+<Panel name        = "Language selection"
+	   callbackString = "language_selection">
+	
+	<Position     x = "350" y = "240"/>
+	
+	
+	<Panel name           = "Languages"
+		   layout         = "CEN_YAXIS">
+		
+		<BGColor    x =  "50" y =  "50" z = "50" />
+		<BordersColor x = "216" y = "169" z =  "0" />
+		
+		<Label name = "Title">
+			<Text string = "Choose your language" fontIndex ="1">
+				<Color r = "255" g = "180" b = "40" />
+			</Text>
+		</Label>     
+		<Separator ratio = "1.0"  />
+		
+		<RadioButton callbackString = "english"
+					 alphaFadeScale = "1.5"
+					 checked        = "true">
+			<Text   string  = "English" />
+		</RadioButton>
+		
+		<RadioButton callbackString = "french"
+					 alphaFadeScale = "1.5">
+			<Text   string  = "French" />
+		</RadioButton>
+		
+		<Label name = "Nothing">
+			<Text string = "" fontIndex ="1" ></Text>
+					</Label>
+		
+		<Button callbackString = "okButton">
+			<Color    x =  "255" y =  "0" z = "0" />
+			<Text    string  = "OK" />
+			<Dimensions x = "120" y = "30" />
+		</Button>
+		
+	
+  		</Panel>
+		
+
+</Panel>
+

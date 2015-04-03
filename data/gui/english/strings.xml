@@ -1,0 +1,32 @@
+<Panel name        = "Strings"
+	   visible     = "false"
+	   callbackString = "strings">
+	
+	
+	<Label callbackString = "stalemate">
+		<Text string = "1/2-1/2 {Stalemate}"></Text>
+	</Label>
+	
+	<Label callbackString = "white_is_mated">
+		<Text string = "0-1 {Black Mates}"></Text>
+	</Label>
+	
+	<Label callbackString = "black_is_mated">
+		<Text string = "1-0 {White Mates}"></Text>
+	</Label>    
+	
+	<Label callbackString = "draw_by_fifty">
+		<Text string = "1/2-1/2 {Fifty move rule}"></Text>
+	</Label>    
+	
+	<Label callbackString = "draw_by_rep">
+		<Text string = "1/2-1/2 {3 fold repetition}"></Text>
+	</Label>    
+	
+	<Label callbackString = "draw">
+		<Text string = "1/2-1/2 {Draw}"></Text>
+	</Label>
+			
+	
+		
+</Panel>

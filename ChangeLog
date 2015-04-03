@@ -1,0 +1,25 @@
+-------------------------------------------------------------------------------
+New in 0.2.0
+
+* New embedded AI Engine : FAILE by Adrien Regimbald  (up to 2250 ELO)
+* Chess rules now totaly respected (even little details)
+* An option menu with a completely new GUI (sxmlGUI)
+* A lot of new options
+* Save configuration file in user's home directory (Linux only)
+* The decor is now a skybox
+* Multi-languages supported
+* Source code is now completely in english
+* Use Scons build system for build and install
+* A lot of other little improvements
+
+
+-------------------------------------------------------------------------------
+New in 0.1.1
+
+* Fixed bug when quit.
+
+
+-------------------------------------------------------------------------------
+New in 0.1.0
+
+* First release to the public

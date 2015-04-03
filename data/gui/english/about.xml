@@ -1,0 +1,68 @@
+<Panel name        	  = "About"
+	   layout         = "CEN_YAXIS"
+	   callbackString = "aboutScene">
+	
+	
+	<Position     x = "150" y = "380"/>
+	
+	<Label name = "l1">
+		<Text string = "Main developer :" fontIndex ="1">
+			<Color r = "0" g = "255" b = "255" />
+		</Text>
+	</Label>
+	
+	<Label name = "l2">
+		<Text string = "Frederic MARTIN" fontIndex ="1">
+			<Color r = "1" g = "0.3" b = "0.3" />
+		</Text>
+	</Label>
+	
+	<Label name = "email">
+		<Text string = "martin-frederic@users.sourceforge.net" fontIndex ="1">
+			<Color r = "0.5" g = "0.5" b = "1" />
+		</Text>
+	</Label>
+	
+	
+	<Label name = "pouet1"><Text string = ""></Text> </Label>
+	
+	<Label name = "l3">
+		<Text string = "Special acknowledgement :" fontIndex ="1">
+			<Color r = "0" g = "255" b = "255" />
+		</Text>
+	</Label>	
+	
+	<Label name = "l4">
+		<Text string = "BERNARD Vivien, CLAUDIO Antonio, GOTAB Pierre" fontIndex ="1">
+			<Color r = "255" g = "255" b = "0" />
+		</Text>
+	</Label>
+	
+	<Label name = "l5">
+		<Text string = "LE GUEVEL Eric, MARTIN Vincent, MARTIN Helene" fontIndex ="1">
+			<Color r = "255" g = "255" b = "0" />
+		</Text>
+	</Label>
+	
+	<Label name = "l6">
+		<Text string = "GILLES Philippe, ZATTARIN Jean-Baptiste" fontIndex ="1">
+			<Color r = "255" g = "255" b = "0" />
+		</Text>
+	</Label>
+	
+	<Label name = "l7">
+		<Text string = "and all the people I forget to mention !" fontIndex ="1">
+			<Color r = "255" g = "255" b = "0" />
+		</Text>
+	</Label>
+	
+	<Label name = "pouet2"><Text string = ""></Text> </Label>
+	
+	<Label name = "goback">
+		<Text string = "Press ENTER to go back to the main menu" fontIndex ="1">
+			<Color r = "0.5" g = "0.5" b = "0.5" />
+		</Text>
+	</Label>
+	
+</Panel>
+

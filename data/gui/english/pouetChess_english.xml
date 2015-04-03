@@ -1,0 +1,15 @@
+<Panel visible     = "true"
+	   name        = "Main Frame">
+
+		
+		
+		<Panel description = "main_menu_buttons.xml" />
+		<Panel description = "main_menu_options.xml" />
+		<Panel description = "main_game_buttons.xml" />
+		<Panel description = "pawn_promotion.xml" />
+		<Panel description = "results.xml" />
+		<Panel description = "strings.xml" />
+		<Panel description = "about.xml" />
+		
+		
+</Panel>
