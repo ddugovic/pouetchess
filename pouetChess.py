@@ -1,6 +1,6 @@
 # Some code is Copyright (C) 2006  Tobi Vollebregt
 
-import re, os, sys
+import re, os, semver, sys
 import SCons.Util
 from SCons.Variables import Variables
 
@@ -11,21 +11,21 @@ def exists(env):
 
 def platform():
 	if sys.platform == 'linux2' or sys.platform == 'linux-i386':
-		print "Detected platform : linux"
+		print("Detected platform : linux")
 		detected_platform='linux'
 	elif sys.platform[:7] == 'freebsd':
-		print "Detected platform : freebsd (%s)" % sys.platform
-		print "WARNING: support is incomplete"
+		print("Detected platform : freebsd (%s)" % sys.platform)
+		print("WARNING: support is incomplete")
 		detected_platform='freebsd'
 	else:
-		print "Platform not supported yet, please edit SConstruct file"
+		print("Platform not supported yet, please edit SConstruct file")
 		detected_platform='unknown'
 	return detected_platform
 
 
 # Set gcc_3_4 to false for versions of gcc below 3.4.
 def processor(gcc_3_4=True):
-	print "Detecting processor..."
+	print("Detecting processor...")
 
 	try:
 		f = open('/proc/cpuinfo', 'r')
@@ -34,10 +34,10 @@ def processor(gcc_3_4=True):
 		bits = platform.architecture()[0]
 		if bits == '32bit':
 			# default to i686 on 32 bit platforms without /proc/cpuinfo
-			print "  couldn't detect; assuming Pentium Pro or better"
+			print("  couldn't detect; assuming Pentium Pro or better")
 			archflags=['-march=i686']
 		else:
-			print "  couldn't detect"
+			print("  couldn't detect")
 			archflags=[]
 		return archflags
 
@@ -70,7 +70,7 @@ def processor(gcc_3_4=True):
 					# Automatically reorders/realigns when
 					# converting to VLIW, so no alignment
 					# saves space without sacrificing speed
-					print "  found Transmeta Efficeon"
+					print("  found Transmeta Efficeon")
 					archflags=['-march=i686']
 					if gcc_3_4: archflags+=['-mtune=pentium3']
 					else: archflags+=['-mcpu=pentium3']
@@ -78,80 +78,80 @@ def processor(gcc_3_4=True):
 		elif vendor == "GenuineIntel":
 			if str.startswith("model name"):
 				if str.find("Intel(R) Pentium(R) 4 CPU") != -1:
-					print "  found Intel Pentium 4"
+					print("  found Intel Pentium 4")
 					archflags=['-march=pentium4']
 				elif str.find("Coppermine") != -1:
-					print "  found Intel Celeron (Coppermine)"
+					print("  found Intel Celeron (Coppermine)")
 					archflags=['-march=pentium3']
 				elif str.find("Pentium III") != -1:
-					print "  found Intel Pentium III"
+					print("  found Intel Pentium III")
 					archflags=['-march=pentium3']
 				elif str.find("Pentium II") != -1:
-					print "  found Intel Pentium II"
+					print("  found Intel Pentium II")
 					archflags=['-march=pentium2']
 				elif str.find("Intel(R) Celeron(R) CPU") != -1:
-					print "  found Intel Celeron (Willamette)"
+					print("  found Intel Celeron (Willamette)")
 					archflags=['-march=pentium4']
 				elif str.find("Celeron") != -1:
-					print "  found Intel Celeron 1"
+					print("  found Intel Celeron 1")
 					archflags=['-march=pentium2']
 				elif str.find("Intel(R) Pentium(R) M") != -1:
-					print "  found Intel Pentium-M"
+					print("  found Intel Pentium-M")
 					if gcc_3_4: archflags=['-march=pentium-m']
 					else:
-						print "WARNING: gcc versions below 3.4 don't support -march=pentium-m, using -march=pentium4 instead"
+						print("WARNING: gcc versions below 3.4 don't support -march=pentium-m, using -march=pentium4 instead")
 						archflags=['-march=pentium4']
 				elif str.find("Intel(R) Xeon(TM) CPU") != -1:
-					print "  found Intel Xeon w/EM64T"
+					print("  found Intel Xeon w/EM64T")
 					archflags=['-march=nocona', '-mmmx', '-msse3']
 		elif vendor == "AuthenticAMD":
 			if str.startswith("model name"):
 				if str.find("Duron") != -1:
 					if model == 7:
-						print "  found AMD Duron Morgan"
+						print("  found AMD Duron Morgan")
 						archflags=['-march=athlon-xp']
 					elif model == 3:
-						print "  found AMD Mobile Duron"
+						print("  found AMD Mobile Duron")
 						archflags=['-march=athlon-tbird']
 					else:
-						print "  found AMD Duron"
+						print("  found AMD Duron")
 						archflags=['-march=athlon-tbird']
 				elif str.find("Sempron") != -1:
-					print "  found AMD Sempron 64"
+					print("  found AMD Sempron 64")
 					if gcc_3_4: archflags=['-march=athlon64']
 					else:
-						print "WARNING: gcc versions below 3.4 don't support -march=athlon64, using -march=athlon-4 -msse2 -mfpmath=sse instead"
+						print("WARNING: gcc versions below 3.4 don't support -march=athlon64, using -march=athlon-4 -msse2 -mfpmath=sse instead")
 						archflags=['-march=athlon', '-msse2', '-mfpmath=sse']
 				elif str.find("Athlon") != -1:
 					if str.find("64") != -1:
-						print "  found AMD Athlon 64"
+						print("  found AMD Athlon 64")
 						if gcc_3_4: archflags=['-march=athlon64']
 						else:
-							print "WARNING: gcc versions below 3.4 don't support -march=athlon64, using -march=athlon-4 -msse2 -mfpmath=sse instead"
+							print("WARNING: gcc versions below 3.4 don't support -march=athlon64, using -march=athlon-4 -msse2 -mfpmath=sse instead")
 							archflags=['-march=athlon', '-msse2', '-mfpmath=sse']
 					# maybe this should use int(family_number) rather than family
 					# i have no way of checking
 					elif family == 6 and model == 8:
-						print "  found AMD Athlon Thunderbird XP"
+						print("  found AMD Athlon Thunderbird XP")
 						archflags=['-march=athlon-xp']
 					else:
-						print "  found AMD Athlon"
+						print("  found AMD Athlon")
 						archflags=['-march=athlon']
 				elif str.find("Opteron") != -1:
-					print "  found AMD Opteron"
+					print("  found AMD Opteron")
 					if gcc_3_4: archflags=['-march=opteron']
 					else:
-						print "WARNING: gcc versions below 3.4 don't support -march=opteron, using -march=athlon-4 -msse2 -mfpmath=sse instead"
+						print("WARNING: gcc versions below 3.4 don't support -march=opteron, using -march=athlon-4 -msse2 -mfpmath=sse instead")
 						archflags=['-march=athlon-4', '-msse2', '-mfpmath=sse']
 		else:
 			if str.find("Nehemiah") != -1:
-				print "  found VIA Nehemiah"
+				print("  found VIA Nehemiah")
 				archflags=['-march=c3-2']
 			elif str.find("Eden") != -1:
-				print "  found VIA Eden C3"
+				print("  found VIA Eden C3")
 				archflags=['-march=c3']
 			elif str.find("Ezra") != -1:
-				print "  found VIA Ezra"
+				print("  found VIA Ezra")
 				archflags=['-march=c3']
 
 		str = f.readline()
@@ -159,26 +159,26 @@ def processor(gcc_3_4=True):
 		if vendor == "":
 			if family != -1: # has to be checked...
 				if family_number in ('970'):
-					print "  found PowerPC 970 (G5)"
+					print("  found PowerPC 970 (G5)")
 					archflags=['-mtune=G5', '-maltivec', '-mabi=altivec']
 				#i think these are all the same as far as gcc cares
 				elif family_number in ('7450','7455','7445','7447','7457'):
-					print "  found PowerPC 7450 (G4 v2)"
+					print("  found PowerPC 7450 (G4 v2)")
 					archflags=['-mtune=7450', '-maltivec', '-mabi=altivec']
 				elif family_number in ('7400','7410'):
-					print "  found PowerPC 7400 (G4)"
+					print("  found PowerPC 7400 (G4)")
 					archflags=['-mtune=7400', '-maltivec', '-mabi=altivec']
 				elif family_number in ('750'):
-					print "  found PowerPC 750 (G3)"
+					print("  found PowerPC 750 (G3)")
 					archflags=['-mtune=750']
 				elif family_number in ('740'):
-					print "  found PowerPC 740 (G3)"
+					print("  found PowerPC 740 (G3)")
 					archflags=['-mtune=740']
 				elif family_number in ('604'):
-					print "  found PowerPC 604"
+					print("  found PowerPC 604")
 					archflags=['-mtune=604']
 				elif family_number in ('603'):
-					print "  found PowerPC 603"
+					print("  found PowerPC 603")
 					archflags=['-mtune=603']
 
 
@@ -188,10 +188,10 @@ def processor(gcc_3_4=True):
 		import platform
 		bits = platform.architecture()[0]
 		if bits == '32bit':
-			print "Unrecognized or couldn't detect CPU, guessing i686 compatible.."
+			print("Unrecognized or couldn't detect CPU, guessing i686 compatible..")
 			archflags=['-march=i686']
 		else:
-			print "Unrecognized or couldn't detect CPU, guessing generic.."
+			print("Unrecognized or couldn't detect CPU, guessing generic..")
 			archflags=['-mtune=generic']
 	return archflags
 
@@ -204,7 +204,7 @@ def check_gcc_version(env, conf = None):
 	# As opposed to the other functions in this file, which are called from the
 	# configure() function below, this one is called directly from rts.py while
 	# parsing `optimize=' configure argument.
-	print env.subst("Checking $CC version..."),
+	print(env.subst("Checking $CC version..."), end=' ')
 	try:
 		f = os.popen(env.subst('$CC --version'))
 		version = f.read()
@@ -212,35 +212,35 @@ def check_gcc_version(env, conf = None):
 		f.close()
 	if version:
 		version = re.search('[0-9]\.[0-9]\.[0-9]', version).group()
-		print version
+		print(version)
 		return re.split('\.', version)
 	else:
-		print env.subst("$CC not found")
+		print(env.subst("$CC not found"))
 		env.Exit(1)
 
 
 
 
 def check_sdl(env, conf):
-	print "Checking for SDL..."
-	print "  Checking for sdl-config...",
+	print("Checking for SDL...")
+	print("  Checking for sdl-config...", end=' ')
 	sdlcfg = env.WhereIs("sdl-config")
 	if not sdlcfg: # for FreeBSD
 		sdlcfg = env.WhereIs("sdl11-config")
 	if sdlcfg:
-		print sdlcfg
-		print "  Checking for LibSDL >= 1.2.8...",
+		print(sdlcfg)
+		print("  Checking for LibSDL >= 1.2.8...", end=' ')
 		sdlobj = os.popen(sdlcfg+" --version")
 		sdlver = sdlobj.read()
 		sdlerr = sdlobj.close()
-		print sdlver,
-		if sdlver.split('.') >= [1,2,8]:
+		print(sdlver, end=' ')
+		if semver.compare(sdlver, "1.2.8") >= 0:
 			env.ParseConfig(sdlcfg+" --cflags --libs")
 		else:
-			print "You need LibSDL version 1.2.8 or greater for this program"
+			print("You need LibSDL version 1.2.8 or greater for this program")
 			env.Exit(1)
 	else:
-		print "not found"
+		print("not found")
 		if env['platform'] == 'freebsd':
 			guess_include_path(env, conf, 'SDL', 'SDL11')
 		else:
@@ -261,8 +261,8 @@ def config_h_build(target, source, env):
 	}
 
 
-	config_h = file(str(target), "w")
-	config_h_in = file(str(source), "r")
+	config_h = open(str(target), "w")
+	config_h_in = open(str(source), "r")
 	config_h.write(config_h_in.read() % config_h_defines)
 	config_h_in.close()
 	config_h.close()
@@ -311,9 +311,9 @@ def generate(env):
 	# Use this to avoid an error message 'how to make target configure ?'
 	env.Alias('configure', None)
 	
-	if not 'configure' in sys.argv and not ((env.has_key('is_configured') and env['is_configured'] == 1) or env.GetOption('clean')):
-		print "Not configured or configure script updated.  Run `scons configure' first."
-		print "Use `scons --help' to show available configure options to `scons configure'."
+	if not 'configure' in sys.argv and not (('is_configured' in env and env['is_configured'] == 1) or env.GetOption('clean')):
+		print("Not configured or configure script updated.  Run `scons configure' first.")
+		print("Use `scons --help' to show available configure options to `scons configure'.")
 		env.Exit(1)
 		
 		
@@ -322,9 +322,9 @@ def generate(env):
 		
 		# Important : unset existing variables
 		for key in ['platform', 'debug', 'optimize', 'profile', 'prefix', 'datadir', 'noinstall', 'cachedir', 'strip', 'LINKFLAGS', 'LIBPATH', 'LIBS', 'CCFLAGS', 'CXXFLAGS', 'CPPDEFINES', 'CPPPATH', 'is_configured']:
-			if env.has_key(key): env.__delitem__(key)
+			if key in env: env.__delitem__(key)
 		
-		print "\nNow configuring.  If something fails, consult `config.log' for details.\n"
+		print("\nNow configuring.  If something fails, consult `config.log' for details.\n")
 		
 		#parse cmdline
 		def makeHashTable(args):
@@ -344,7 +344,7 @@ def generate(env):
 			
 		env['is_configured'] = 1
 		
-		if args.has_key('platform'): env['platform'] = args['platform']
+		if 'platform' in args: env['platform'] = args['platform']
 		else: env['platform'] = platform()
 	
 		gcc_version = check_gcc_version(env)
@@ -353,18 +353,18 @@ def generate(env):
 		
 		# Declare some helper functions for boolean and string options.
 		def bool_opt(key, default):
-			if args.has_key(key):
+			if key in args:
 				if args[key] == 'no' or args[key] == 'false' or args[key] == '0':
 					env[key] = False
 				elif args[key] == 'yes' or args[key] == 'true' or args[key] == '1':
 					env[key] = True
 				else:
-					print "\ninvalid", key, "option, must be one of: yes, true, no, false, 0, 1."
+					print("\ninvalid", key, "option, must be one of: yes, true, no, false, 0, 1.")
 					env.Exit(1)
 			else: env[key] = default
 
 		def string_opt(key, default):
-			if args.has_key(key):
+			if key in args:
 				env[key] = args[key]
 			else: env[key] = default		
 		
@@ -376,31 +376,31 @@ def generate(env):
 		# profile?
 		bool_opt('profile', False)
 		if env['profile']:
-			print "profiling enabled,",
+			print("profiling enabled,", end=' ')
 			env.AppendUnique(CCFLAGS=['-pg'], LINKFLAGS=['-pg'])
 		else:
-			print "profiling NOT enabled,",
+			print("profiling NOT enabled,", end=' ')
 		
 		# debug?
-		if args.has_key('debug'):
+		if 'debug' in args:
 			level = args['debug']
 			if level == 'no' or level == 'false': level = '0'
 			elif level == 'yes' or level == 'true': level = '3'
 		else:
 			level = '0'
 		if int(level) == 0:
-			print "debugging NOT enabled,",
+			print("debugging NOT enabled,", end=' ')
 			env['debug'] = 0
 		elif int(level) >= 1 and int(level) <= 3:
-			print "level", level, "debugging enabled,"
+			print("level", level, "debugging enabled,")
 			env['debug'] = level
 			env.AppendUnique(CCFLAGS=['-ggdb'+level], CPPDEFINES=['DEBUG', '_DEBUG'])
 		else:
-			print "\ninvalid debug option, must be one of: yes, true, no, false, 0, 1, 2, 3."
+			print("\ninvalid debug option, must be one of: yes, true, no, false, 0, 1, 2, 3.")
 			env.Exit(1)
 		
 		# optimize?
-		if args.has_key('optimize'):
+		if 'optimize' in args:
 			level = args['optimize']
 			if level == 'no' or level == 'false': level = '0'
 			elif level == 'yes' or level == 'true': level = '1'
@@ -408,19 +408,19 @@ def generate(env):
 			if env['debug']: level = '0'
 			else: level = '1'
 		if level == 'noarch':
-		 	print "noarch optimizing"
+			print("noarch optimizing")
 			env['optimize'] = 'noarch'
 			env.AppendUnique(CCFLAGS=['-O1', '-pipe'])	
 		elif int(level) >= 1 and int(level) <= 3:
-			print "level", level, "optimizing enabled"
+			print("level", level, "optimizing enabled")
 			env['optimize'] = level
 			archflags = processor(gcc_version >= ['3','4','0'])
 			env.AppendUnique(CCFLAGS=['-O'+level, '-pipe']+archflags)
 		elif int(level) == 0:
-			print "optimizing NOT enabled,"
+			print("optimizing NOT enabled,")
 			env['optimize'] = 0
 		else:
-			print "\ninvalid optimize option, must be one of: yes, true, no, false, 0, 1, 2, 3, noarch."
+			print("\ninvalid optimize option, must be one of: yes, true, no, false, 0, 1, 2, 3, noarch.")
 			env.Exit(1)
 
 
@@ -437,30 +437,30 @@ def generate(env):
 		
 		## Check for SDL
 		if not conf.CheckCHeader('SDL.h') and not conf.CheckCHeader('SDL/SDL.h') and not conf.CheckCHeader('SDL11/SDL.h'):
-			print 'LibSDL headers are required for this program'
+			print('LibSDL headers are required for this program')
 			env.Exit(1)
 			
 		if not conf.CheckLib('SDL') and not conf.CheckLib('SDL-1.1'):
-			print 'LibSDL is required for this program'
+			print('LibSDL is required for this program')
 			env.Exit(1)
 		
 		
 		## Check for SDL_image
 		if not conf.CheckCHeader('SDL_image.h') and not conf.CheckCHeader('SDL/SDL_image.h') and not conf.CheckCHeader('SDL11/SDL_image.h'):
-			print "SDL_image is required for this program"
+			print("SDL_image is required for this program")
 			env.Exit(1)
 			
 		if not conf.CheckLib('SDL_image'):
-			print 'LibSDL_image is required for this program'
+			print('LibSDL_image is required for this program')
 			env.Exit(1)
 			
 			
 		## Check for OpenGL	
 		if not conf.CheckLib('GL'):
-			print "You need an OpenGL development library for this program"
+			print("You need an OpenGL development library for this program")
 			env.Exit(1)
 		if not conf.CheckLib('GLU'):
-			print "You need the OpenGL Utility (GLU) library for this program"
+			print("You need the OpenGL Utility (GLU) library for this program")
 			env.Exit(1)
 			
 
@@ -468,25 +468,25 @@ def generate(env):
 		
 		if env['noinstall']:
 			env['datadir']="../data"
-			print "========================================================="
-			print "pouetChess will not be installed (option noinstall)"
+			print("=========================================================")
+			print("pouetChess will not be installed (option noinstall)")
 		else:
-			print "========================================================="
-			print "Program will be installed in : %s" % env['prefix']
-			print "Data will be intalled in : %s" % env.subst(env['datadir'])
+			print("=========================================================")
+			print("Program will be installed in : %s" % env['prefix'])
+			print("Data will be intalled in : %s" % env.subst(env['datadir']))
 		
-		print "========================================================="
-		print "\nEverything seems OK.  Run `scons' now to build.\n"
-		print "========================================================="
+		print("=========================================================")
+		print("\nEverything seems OK.  Run `scons' now to build.\n")
+		print("=========================================================")
 		
 		
 		# fall back to environment variables if neither debug nor optimize options are present
-		if not args.has_key('debug') and not args.has_key('optimize'):
-			if os.environ.has_key('CFLAGS'):
-				print "using CFLAGS:", os.environ['CFLAGS']
+		if 'debug' not in args and 'optimize' not in args:
+			if 'CFLAGS' in os.environ:
+				print("using CFLAGS:", os.environ['CFLAGS'])
 				env['CCFLAGS'] = SCons.Util.CLVar(os.environ['CFLAGS'])
-			if os.environ.has_key('CXXFLAGS'):
-				print "using CXXFLAGS:", os.environ['CXXFLAGS']
+			if 'CXXFLAGS' in os.environ:
+				print("using CXXFLAGS:", os.environ['CXXFLAGS'])
 				env['CXXFLAGS'] = SCons.Util.CLVar(os.environ['CXXFLAGS'])
 			else:
 				env['CXXFLAGS'] = env['CCFLAGS']
@@ -497,7 +497,7 @@ def generate(env):
 		config_h_build("src/config.h","config.h.in",env)
 
 	#Should we strip the exe?
-	if env.has_key('strip') and env['strip'] and not env['debug'] and not env['profile'] and not env.GetOption('clean'):
+	if 'strip' in env and env['strip'] and not env['debug'] and not env['profile'] and not env.GetOption('clean'):
 		env['strip'] = True
 	else:
 		env['strip'] = False

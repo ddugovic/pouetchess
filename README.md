@@ -47,7 +47,7 @@ How to Compile pouetChess:
 pouetChess uses the Scons build system. So if you want to compile from
 source you will need it.
 
-To build pouetChess you have to configure first : `scons configure`
+To build pouetChess you have to configure first : `pip install semver && scons configure`
 
 To know all the options, you can do `scons --help`
 
